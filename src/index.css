@@ -23,8 +23,8 @@
 html { scroll-behavior: smooth; }
 
 body {
-  /* background: var(--bg-primary); */
-  background-color: blue;
+  background: var(--bg-primary);
+
   color: var(--text-primary);
   font-family: var(--font-body);
   overflow-x: hidden;
