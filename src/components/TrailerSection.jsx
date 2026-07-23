@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ScrollReveal from "./ScrollReveal"; // apne path ke mutabiq adjust kar lo
 import "./TrailerSection.css";
 
@@ -14,8 +14,24 @@ const shorts = [
 
 function VimeoFrame({ id, hash, title }) {
   const [ratio, setRatio] = useState(16 / 9); // load hone tak fallback
+  const [active, setActive] = useState(false);
+  const frameRef = useRef(null);
 
   useEffect(() => {
+    const node = frameRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setActive(true);
+        observer.disconnect();
+      }
+    }, { rootMargin: "300px 0px" });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!active) return;
     let alive = true;
     const pageUrl = `https://vimeo.com/${id}${hash ? `/${hash}` : ""}`;
 
@@ -29,7 +45,7 @@ function VimeoFrame({ id, hash, title }) {
     return () => {
       alive = false;
     };
-  }, [id, hash]);
+  }, [id, hash, active]);
 
   const src =
     `https://player.vimeo.com/video/${id}` +
@@ -37,11 +53,11 @@ function VimeoFrame({ id, hash, title }) {
     "title=0&byline=0&portrait=0&badge=0&autopause=0&dnt=1";
 
   return (
-    <div
+    <div ref={frameRef}
       className={`short-frame ${ratio < 1 ? "is-portrait" : ""}`}
       style={{ aspectRatio: ratio }}
     >
-      <iframe
+      {active && <iframe
         src={src}
         title={title}
         loading="lazy"
@@ -49,7 +65,7 @@ function VimeoFrame({ id, hash, title }) {
         referrerPolicy="strict-origin-when-cross-origin"
         allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
         allowFullScreen
-      />
+      />}
     </div>
   );
 }

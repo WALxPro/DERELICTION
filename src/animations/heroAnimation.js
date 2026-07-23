@@ -1,7 +1,14 @@
 import gsap from "gsap";
 
 export function heroAnimation() {
+  const hero = document.querySelector(".hero");
+  if (!hero || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return () => {};
+
+  let disposeEvents = () => {};
+  const ctx = gsap.context(() => {
   const tl = gsap.timeline();
+  const moveDepthX = gsap.quickTo(".hero-depth-layer", "x", { duration: 0.45, ease: "power2.out" });
+  const moveDepthY = gsap.quickTo(".hero-depth-layer", "y", { duration: 0.45, ease: "power2.out" });
 
   // INITIAL STATES
 
@@ -22,7 +29,6 @@ export function heroAnimation() {
     opacity: 0,
     y: 50,
     rotateX: 70,
-    filter: "blur(5px)",
   });
 
   gsap.set(".hero-buttons .btn", {
@@ -34,7 +40,7 @@ export function heroAnimation() {
   // CAMERA
 
   gsap.fromTo(
-    ".hero",
+    hero,
     {
       scale: 1.04,
     },
@@ -63,8 +69,6 @@ export function heroAnimation() {
         opacity: 1,
         y: 0,
         rotateX: 0,
-        filter: "blur(0px)",
-
         duration: 0.7,
 
         stagger: 0.035,
@@ -89,8 +93,6 @@ export function heroAnimation() {
       {
         opacity: 1,
         x: 0,
-        filter: "blur(0px)",
-
         duration: 0.5,
 
         stagger: 0.1,
@@ -192,33 +194,32 @@ export function heroAnimation() {
 
   // MOUSE PARALLAX
 
-  const hero = document.querySelector(".hero");
-
   function moveHero(e) {
     const x = (e.clientX / window.innerWidth - 0.5) * 20;
 
     const y = (e.clientY / window.innerHeight - 0.5) * 20;
 
-    gsap.to(".hero-depth-layer", {
-      x,
-      y,
-
-      duration: 0.8,
-
-      ease: "power3.out",
-    });
+    moveDepthX(x);
+    moveDepthY(y);
   }
 
   function resetHero() {
-    gsap.to(".hero-depth-layer", {
-      x: 0,
-      y: 0,
-
-      duration: 1,
-    });
+    moveDepthX(0);
+    moveDepthY(0);
   }
 
   hero?.addEventListener("mousemove", moveHero);
 
   hero?.addEventListener("mouseleave", resetHero);
+
+  disposeEvents = () => {
+    hero.removeEventListener("mousemove", moveHero);
+    hero.removeEventListener("mouseleave", resetHero);
+  };
+  }, hero);
+
+  return () => {
+    disposeEvents();
+    ctx.revert();
+  };
 }

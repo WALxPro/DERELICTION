@@ -6,6 +6,12 @@
   isolation: isolate;
 }
 
+/* Off-screen sections no longer compete with the current scroll frame. */
+.section:not(:first-child) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
 .section::before {
   content: '';
   position: absolute;
@@ -37,6 +43,41 @@
   transform: translateZ(0);
 }
 
+/* Compositor-only ambient layers: richer motion without scroll jank. */
+.hero::before,
+.hero::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform, opacity;
+}
+
+.hero::before {
+  width: 72vmax;
+  height: 72vmax;
+  left: -30vmax;
+  top: -32vmax;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(184, 45, 35, 0.28) 0%, rgba(125, 31, 31, 0.12) 34%, transparent 68%);
+  animation: heroAmbientDrift 18s ease-in-out infinite alternate;
+}
+
+.hero::after {
+  width: 56vmax;
+  height: 56vmax;
+  right: -26vmax;
+  bottom: -31vmax;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.07) 36%, transparent 68%);
+  animation: heroAmbientDrift 22s ease-in-out -8s infinite alternate-reverse;
+}
+
+@keyframes heroAmbientDrift {
+  from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.65; }
+  to { transform: translate3d(9vmax, 7vmax, 0) scale(1.16); opacity: 1; }
+}
+
 .hero-bg {
   position: absolute;
   inset: 0;
@@ -58,10 +99,10 @@
   width: 360px;
   height: 360px;
   background: radial-gradient(circle, rgba(201,168,76,0.22), transparent 68%);
-  filter: blur(20px);
+  /* The radial gradient already has a soft edge; skip an expensive GPU blur. */
   pointer-events: none;
   z-index: 1;
-  animation: floatGlow 8s ease-in-out infinite;
+  will-change: transform;
 }
 
 @keyframes floatGlow {
@@ -93,7 +134,7 @@
   filter: blur(2px);
   opacity: 0.8;
   background: radial-gradient(circle, rgba(201,168,76,0.3), transparent 70%);
-  animation: driftOrb 10s ease-in-out infinite;
+  will-change: transform;
 }
 
 .orb-one { width: 220px; height: 220px; left: 6%; top: 20%; }
@@ -109,7 +150,7 @@
   padding: 10px 26px;
   margin-bottom: 28px;
   background: rgba(201,168,76,0.08);
-  backdrop-filter: blur(10px);
+  background: rgba(33, 24, 15, 0.88);
 }
 @media (max-width: 768px) {
   .hero-badge {
@@ -138,7 +179,7 @@
 }
 .title-letter{
   display:inline-block;
-  will-change:transform,opacity,filter;
+  will-change:transform,opacity;
 }
 .text-reveal-word,
 .text-reveal-char {
@@ -225,7 +266,7 @@
   letter-spacing: 0.04em;
   color: var(--gold-light);
   background: rgba(201,168,76,0.06);
-  backdrop-filter: blur(8px);
+  background: rgba(201,168,76,0.1);
 }
 
 .stars-row { color: var(--gold); display: flex; gap: 4px; margin: 6px 0 10px; }
@@ -323,6 +364,12 @@
   .small-overlap { width: 50%; bottom: -20px; right: 5px; }
 }
 
+@media (max-width: 768px) {
+  /* Preserve the atmosphere on phones without animating dozens of layers. */
+  .particle-canvas .particle:nth-child(n + 13) { display: none; }
+  .hero-orb { opacity: 0.5; }
+}
+
 /* ---- TABLE ---- */
 .elegant-table { width: 100%; border-collapse: collapse; max-width: 760px; margin: 0 auto; }
 .elegant-table tr { border-bottom: 1px solid var(--gold-border); }
@@ -358,7 +405,7 @@
   border-radius: 999px;
   color: var(--text-primary);
   background: rgba(255,255,255,0.04);
-  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.06);
   font-size: 0.95rem;
 }
 
@@ -688,5 +735,3 @@
     max-height: 500px;
   }
 }
-
-

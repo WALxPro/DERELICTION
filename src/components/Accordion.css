@@ -5,7 +5,7 @@
 
 .accordion-item {
   border-bottom: 1px solid var(--gold-border);
-  background: var(--bg-card);
+  background: linear-gradient(145deg, #302116 0%, #1a110b 100%);
   margin-bottom: 10px;
   border-radius: 3px;
   overflow: hidden;

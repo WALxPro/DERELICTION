@@ -11,7 +11,6 @@ import cover from "../assets/book_cover.webp";
 import portrait from "../assets/author_portrait.webp";
 import BookTrailer from "../assets/book_trailer.mp4";
 import "../sections.css";
-import { useEffect } from "react";
 import { heroAnimation } from "../animations/heroAnimation";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
@@ -97,9 +96,9 @@ export default function Home() {
   const bookTextRef = useRef(null);
   const authorSection = useRef(null);
   const whyRef = useRef(null);
-  useEffect(() => {
-    console.log("GSAP running");
-    heroAnimation();
+  // Start before the first paint so the hero never flashes or jumps into place.
+  useLayoutEffect(() => {
+    return heroAnimation();
   }, []);
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -113,8 +112,6 @@ export default function Home() {
 
         y: 80,
         opacity: 0,
-        filter: "blur(12px)",
-
         duration: 1,
 
         stagger: 0.15,
@@ -139,8 +136,6 @@ export default function Home() {
         opacity: 0,
         rotateY: 25,
         scale: 0.8,
-        filter: "blur(12px)",
-
         duration: 1.2,
 
         ease: "power4.out",
@@ -156,8 +151,6 @@ export default function Home() {
 
         y: 60,
         opacity: 0,
-        filter: "blur(8px)",
-
         duration: 0.8,
 
         stagger: 0.12,
@@ -209,7 +202,7 @@ export default function Home() {
         <div className="hero-overlay" />
         <div className="hero-glow" />
 
-        <ParticleCanvas count={40} />
+        <ParticleCanvas count={28} />
 
         <div className="hero-depth-layer">
           <div className="hero-orb orb-one" />
