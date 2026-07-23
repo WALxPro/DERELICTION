@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { FaBars, FaTimes } from 'react-icons/fa'
-import logo from '../assets/logo.png'
+import logo from '../assets/logo.webp'
 import './Navbar.css'
 
 const LINKS = [
