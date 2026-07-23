@@ -54,3 +54,22 @@
   padding: 0 26px 24px;
   line-height: 1.8;
 }
+
+@media (max-width: 600px) {
+  .accordion-question {
+    font-size: 0.9rem;
+    padding: 16px 18px;
+  }
+
+  .accordion-answer p {
+    font-size: 0.85rem;
+    padding: 0 18px 18px;
+    line-height: 1.6;
+  }
+
+  .accordion-icon {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+  }
+}

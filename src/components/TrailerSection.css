@@ -1,0 +1,206 @@
+/* ===== Section shell ===== */
+
+.shorts-section {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(201, 168, 76, 0.08), transparent 45%),
+    radial-gradient(circle at 12% 90%, rgba(110, 20, 30, 0.12), transparent 40%),
+    #0d0a10;
+}
+
+.shorts-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.4) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.shorts-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Heading ===== */
+
+.shorts-head {
+  max-width: 640px;
+  margin: 0 auto 54px;
+  text-align: center;
+}
+
+.shorts-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.shorts-eyebrow span {
+  width: 38px;
+  height: 1px;
+  background: rgba(201, 168, 76, 0.55);
+}
+
+.shorts-sub {
+  margin: 14px 0 0;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== Grid ===== */
+
+.shorts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: clamp(28px, 4vw, 48px);
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+/* sirf aik video ho to card center + limited width */
+.shorts-grid:has(> *:only-child) {
+  max-width: 800px;
+}
+
+.short-card {
+  margin: 0;
+}
+
+/* ===== Video frame ===== */
+
+.short-frame {
+  position: relative;
+  width: 100%;
+  padding: 6px;
+  border: 1px solid rgba(201, 168, 76, 0.42);
+  border-radius: 18px;
+  background: linear-gradient(
+    145deg,
+    rgba(201, 168, 76, 0.15),
+    rgba(255, 255, 255, 0.02)
+  );
+  box-shadow:
+    0 26px 70px rgba(0, 0, 0, 0.55),
+    0 0 30px rgba(201, 168, 76, 0.09);
+  transition:
+    transform 0.45s ease,
+    border-color 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+.short-frame:hover {
+  transform: translateY(-5px);
+  border-color: rgba(201, 168, 76, 0.8);
+  box-shadow:
+    0 34px 85px rgba(0, 0, 0, 0.62),
+    0 0 50px rgba(201, 168, 76, 0.17);
+}
+
+/* gold corner accents */
+.short-frame::before,
+.short-frame::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+}
+
+.short-frame::before {
+  top: -7px;
+  left: -7px;
+  border-top: 1px solid var(--gold);
+  border-left: 1px solid var(--gold);
+  border-top-left-radius: 16px;
+}
+
+.short-frame::after {
+  right: -7px;
+  bottom: -7px;
+  border-right: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+  border-bottom-right-radius: 16px;
+}
+
+.short-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 13px;
+  background: #000;
+}
+
+/* portrait (9:16) video ho to patla card */
+.short-frame.is-portrait {
+  max-width: 380px;
+  max-height: 640px;
+  margin: 0 auto;
+}
+
+/* ===== Caption ===== */
+
+.short-meta {
+  margin-top: 20px;
+  padding-left: 18px;
+  border-left: 1px solid rgba(201, 168, 76, 0.3);
+  text-align: left;
+}
+
+.short-meta h3 {
+  margin: 0 0 6px;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #d8b85d;
+}
+
+.short-meta p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 720px) {
+  .shorts-head {
+    margin-bottom: 40px;
+  }
+
+  .shorts-grid {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .short-frame.is-portrait {
+    max-width: 320px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .short-frame,
+  .short-frame:hover {
+    transform: none;
+    transition: none;
+  }
+}

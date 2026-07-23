@@ -23,8 +23,12 @@ export default function Contact() {
       {/* HERO */}
       <section className="hero" style={{ minHeight: '45vh' }}>
         <div className="hero-overlay" />
+        <div className="hero-depth-layer">
+          <div className="hero-orb orb-one" />
+          <div className="hero-orb orb-two" />
+        </div>
         <div className="hero-content">
-          <ScrollReveal><h1 className="hero-title" style={{ fontSize: 'clamp(2rem, 5vw, 3.4rem)' }}>GET IN TOUCH</h1></ScrollReveal>
+          <ScrollReveal><h1 className="hero-title" style={{ fontSize: 'clamp(1.3rem, 5vw, 3.4rem)' }}>GET IN TOUCH</h1></ScrollReveal>
           <ScrollReveal delay={100}><div className="gold-divider center" /></ScrollReveal>
           <ScrollReveal delay={160}><p className="hero-subtitle">Media, book orders, collaboration and messages</p></ScrollReveal>
         </div>

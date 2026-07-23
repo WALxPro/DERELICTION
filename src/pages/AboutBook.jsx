@@ -1,11 +1,11 @@
 import React from 'react'
 import { FaAmazon, FaShoppingCart, FaShieldAlt, FaMask, FaWater, FaDove, FaFingerprint, FaBalanceScale, FaPray, FaBrain } from 'react-icons/fa'
 import ScrollReveal from '../components/ScrollReveal.jsx'
-import Book3DTilt from '../components/Book3DTilt.jsx'
 import PlatformSlider from '../components/PlatformSlider.jsx'
 import TestimonialCard from '../components/TestimonialCard.jsx'
 import cover from '../assets/book_cover_full.png'
 import '../sections.css'
+import TestimonialSlider from '../components/TestimonialSlider.jsx'
 
 const DETAILS = [
   { label: 'Genre', value: 'Memoir-Novel' },
@@ -41,8 +41,12 @@ export default function AboutBook() {
     <div>
       {/* HERO */}
       <section className="hero" style={{ minHeight: '100vh' }}>
-        <div className="hero-bg" style={{ backgroundImage: `url(${cover})` }} />
+        <div className="hero-bg"  />
         <div className="hero-overlay" />
+        <div className="hero-depth-layer">
+          <div className="hero-orb orb-one" />
+          <div className="hero-orb orb-two" />
+        </div>
         <div className="hero-content">
           <ScrollReveal><span className="hero-badge">The Book</span></ScrollReveal>
           <ScrollReveal delay={100}><h1 className="hero-title">DERELICTION</h1></ScrollReveal>
@@ -58,10 +62,12 @@ export default function AboutBook() {
         </div>
       </section>
 
-      {/* 3D BOOK EXPERIENCE */}
+      {/* BOOK OVERVIEW */}
       <section className="section dark">
         <div className="container grid-2">
-          <ScrollReveal direction="left"><Book3DTilt width={340} /></ScrollReveal>
+          <ScrollReveal direction="left">
+            <div className="framed-image"><img src={cover} alt="Dereliction book cover" /></div>
+          </ScrollReveal>
           <ScrollReveal direction="right">
             <h2 className="section-heading">More Than A <span className="gold">Prison Story</span></h2>
             <p className="text-secondary" style={{ lineHeight: 1.9, margin: '20px 0' }}>
@@ -80,9 +86,9 @@ export default function AboutBook() {
 
       {/* DETAILS GRID */}
       <section className="section darker">
-        <div className="container grid-6 stagger">
+        <div className="container grid-6">
           {DETAILS.map((d, i) => (
-            <ScrollReveal key={d.label} delay={i * 90}>
+            <ScrollReveal key={d.label} delay={i * 70} direction="up">
               <div className="info-card gold-card">
                 <span className="eyebrow">{d.label}</span>
                 <h4 style={{ marginTop: 10 }}>{d.value}</h4>
@@ -95,11 +101,11 @@ export default function AboutBook() {
       {/* CORE OF STORY */}
       <section className="section dark">
         <div className="container section-intro">
-          <ScrollReveal><h2 className="section-heading">The Core Of <span className="gold">The Story</span></h2></ScrollReveal>
+          <ScrollReveal direction="up"><h2 className="section-heading">The Core Of <span className="gold">The Story</span></h2></ScrollReveal>
         </div>
-        <div className="container grid-4 stagger">
+        <div className="container grid-4">
           {CORE.map((c, i) => (
-            <ScrollReveal key={c.title} delay={i * 90}>
+            <ScrollReveal key={c.title} delay={i * 80} direction="left">
               <div className="info-card gold-card">
                 <div className="icon-circle">{c.icon}</div>
                 <h4>{c.title}</h4>
@@ -113,11 +119,11 @@ export default function AboutBook() {
       {/* THEMES */}
       <section className="section darker">
         <div className="container section-intro">
-          <ScrollReveal><h2 className="section-heading">Themes That Run <span className="gold">Deep</span></h2></ScrollReveal>
+          <ScrollReveal direction="up"><h2 className="section-heading">Themes That Run <span className="gold">Deep</span></h2></ScrollReveal>
         </div>
-        <div className="container grid-4 stagger">
+        <div className="container grid-4">
           {THEMES.map((t, i) => (
-            <ScrollReveal key={t.title} delay={i * 90}>
+            <ScrollReveal key={t.title} delay={i * 80} direction="right">
               <div className="info-card gold-card">
                 <div className="icon-circle">{t.icon}</div>
                 <h4>{t.title}</h4>
@@ -127,22 +133,31 @@ export default function AboutBook() {
         </div>
       </section>
 
-      {/* REVIEWS */}
-      <section className="section dark">
-        <div className="container section-intro">
-          <ScrollReveal><h2 className="section-heading">Reader <span className="gold">Reviews</span></h2></ScrollReveal>
-        </div>
-        <div className="container grid-3">
-          {TESTIMONIALS.map((t, i) => (
-            <ScrollReveal key={t.name} delay={i * 100}><TestimonialCard {...t} /></ScrollReveal>
-          ))}
-        </div>
-      </section>
+
+
+      <section className="section darker">
+              <div className="container section-intro">
+                <ScrollReveal direction="up">
+                  <h2 className="section-heading" style={{ marginBottom: 10 }}>
+                    Reader <span className="gold">Impact</span>
+                  </h2>
+                </ScrollReveal>
+              </div>
+              <div className="container">
+                <ScrollReveal direction="up">
+                  <TestimonialSlider
+                    testimonials={TESTIMONIALS}
+                    autoPlay
+                    interval={4000}
+                  />
+                </ScrollReveal>
+              </div>
+            </section>
 
       {/* DETAILS TABLE */}
       <section className="section darker">
         <div className="container">
-          <ScrollReveal>
+          <ScrollReveal direction="up">
             <table className="elegant-table">
               <tbody>
                 <tr><td>Title</td><td>Dereliction</td></tr>
@@ -161,15 +176,17 @@ export default function AboutBook() {
       {/* PLATFORM DISTRIBUTION */}
       <section className="section dark">
         <div className="container section-intro">
-          <ScrollReveal><h2 className="section-heading">Platform <span className="gold">Distribution</span></h2></ScrollReveal>
+          <ScrollReveal direction="up"><h2 className="section-heading">Platform <span className="gold">Distribution</span></h2></ScrollReveal>
         </div>
-        <ScrollReveal><PlatformSlider /></ScrollReveal>
+        <ScrollReveal direction="up" blur>
+          <PlatformSlider />
+        </ScrollReveal>
       </section>
 
       {/* CTA */}
       <section className="section darker">
         <div className="container">
-          <ScrollReveal>
+          <ScrollReveal direction="up">
             <div className="cta-box">
               <h2 className="section-heading">Your Copy Is <span className="gold">Waiting</span></h2>
               <div className="hero-buttons">

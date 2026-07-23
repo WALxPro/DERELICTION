@@ -1,0 +1,173 @@
+.socail-card {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background: var(--bg-card);
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+  transition: all 1s ease-in-out;
+  border: 1px solid var(--gold-border);
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  background-color: var(--bg-card);
+  background-image: linear-gradient(
+    145deg,
+    rgba(26, 17, 32, 0.95) 0%,
+    rgba(15, 10, 20, 0.98) 100%
+  );
+}
+
+.logo {
+  position: absolute;
+  right: 50%;
+  bottom: 50%;
+  transform: translate(50%, 50%);
+  transition: all 0.6s ease-in-out;
+  font-family: var(--font-display);
+  font-size: 1.2em;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+
+.icon .svg {
+  fill: var(--gold);
+  width: 100%;
+  height: 100%;
+  transition: all 0.5s ease-in-out;
+}
+
+.box {
+  position: absolute;
+  padding: 10px;
+  text-align: right;
+  background: rgba(201, 168, 76, 0.06);
+  border-top: 1px solid var(--gold-border);
+  border-right: 1px solid var(--gold-border);
+  border-radius: 10% 13% 42% 0% / 10% 12% 75% 0%;
+  box-shadow: -7px 7px 29px rgba(0, 0, 0, 0.4);
+  transform-origin: bottom left;
+  transition: all 1s ease-in-out;
+}
+
+.box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.box:hover .svg {
+  fill: #0A0A0A;
+}
+
+.box1 {
+  width: 70%;
+  height: 70%;
+  bottom: -70%;
+  left: -70%;
+}
+
+.box1::before {
+  background: linear-gradient(
+    135deg,
+    var(--gold-light) 0%,
+    var(--gold) 100%
+  );
+}
+
+.box1:hover::before {
+  opacity: 1;
+}
+
+.box1:hover .icon .svg {
+  filter: drop-shadow(0 0 5px var(--gold-light));
+}
+
+.box2 {
+  width: 50%;
+  height: 50%;
+  bottom: -50%;
+  left: -50%;
+  transition-delay: 0.2s;
+}
+
+.box2::before {
+  background: linear-gradient(
+    135deg,
+    var(--gold) 0%,
+    var(--gold-light) 100%
+  );
+}
+
+.box2:hover::before {
+  opacity: 1;
+}
+
+.box2:hover .icon .svg {
+  filter: drop-shadow(0 0 5px var(--gold-light));
+}
+
+.box3 {
+  width: 30%;
+  height: 30%;
+  bottom: -30%;
+  left: -30%;
+  transition-delay: 0.4s;
+}
+
+.box3::before {
+  background: linear-gradient(
+    135deg,
+    var(--gold-light) 0%,
+    var(--gold) 100%
+  );
+}
+
+.box3:hover::before {
+  opacity: 1;
+}
+
+.box3:hover .icon .svg {
+  filter: drop-shadow(0 0 5px var(--gold-light));
+}
+
+.box4 {
+  width: 10%;
+  height: 10%;
+  bottom: -10%;
+  left: -10%;
+  transition-delay: 0.6s;
+  background: var(--gold-border);
+}
+
+/* IMPORTANT */
+.socail-card:hover {
+  transform: scale(1.05);
+  border-color: var(--gold);
+  box-shadow: var(--gold-glow), 0 20px 45px rgba(0, 0, 0, 0.3);
+}
+
+.socail-card:hover .box {
+  bottom: -1px;
+  left: -1px;
+}
+
+.socail-card:hover .logo {
+  transform: translate(70px, -52px);
+  letter-spacing: 0px;
+  color: var(--gold-light);
+}

@@ -21,8 +21,12 @@ export default function FAQ() {
       {/* HERO */}
       <section className="hero" style={{ minHeight: '45vh' }}>
         <div className="hero-overlay" />
+        <div className="hero-depth-layer">
+          <div className="hero-orb orb-one" />
+          <div className="hero-orb orb-two" />
+        </div>
         <div className="hero-content">
-          <ScrollReveal><h1 className="hero-title" style={{ fontSize: 'clamp(2rem, 5vw, 3.4rem)' }}>FREQUENTLY ASKED QUESTIONS</h1></ScrollReveal>
+          <ScrollReveal><h1 className="hero-title" style={{ fontSize: 'clamp(1rem, 6vw, 4.2rem)' }}> QUESTIONS</h1></ScrollReveal>
           <ScrollReveal delay={100}><div className="gold-divider center" /></ScrollReveal>
           <ScrollReveal delay={160}><p className="hero-subtitle">Everything about Dereliction and Keffier Savary</p></ScrollReveal>
         </div>
@@ -31,14 +35,14 @@ export default function FAQ() {
       {/* ACCORDION */}
       <section className="section dark">
         <div className="container">
-          <ScrollReveal><Accordion items={FAQ_ITEMS} /></ScrollReveal>
+          <ScrollReveal direction="up"><Accordion items={FAQ_ITEMS} /></ScrollReveal>
         </div>
       </section>
 
       {/* CTA */}
       <section className="section darker">
         <div className="container">
-          <ScrollReveal>
+          <ScrollReveal direction="up">
             <div className="cta-box">
               <h2 className="section-heading">Still Have <span className="gold">Questions?</span></h2>
               <Link to="/contact" className="btn btn-gold" style={{ marginTop: 30, display: 'inline-flex' }}>Contact Us</Link>
