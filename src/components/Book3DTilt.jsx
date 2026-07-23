@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import cover from '../assets/book_cover.png'
+import cover from '../assets/book_cover.webp'
 import './Book3DTilt.css'
 
 export default function Book3DTilt({ width = 320 }) {

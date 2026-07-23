@@ -3,7 +3,7 @@ import { FaAmazon, FaShoppingCart, FaShieldAlt, FaMask, FaWater, FaDove, FaFinge
 import ScrollReveal from '../components/ScrollReveal.jsx'
 import PlatformSlider from '../components/PlatformSlider.jsx'
 import TestimonialCard from '../components/TestimonialCard.jsx'
-import cover from '../assets/book_cover_full.png'
+import cover from '../assets/book_cover_full.webp'
 import '../sections.css'
 import TestimonialSlider from '../components/TestimonialSlider.jsx'
 

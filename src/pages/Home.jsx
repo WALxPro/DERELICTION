@@ -7,8 +7,8 @@ import AnimatedCounter from "../components/AnimatedCounter.jsx";
 import TestimonialCard from "../components/TestimonialCard.jsx";
 import Book3DTilt from "../components/Book3DTilt.jsx";
 
-import cover from "../assets/book_cover.png";
-import portrait from "../assets/author_portrait.jpg";
+import cover from "../assets/book_cover.webp";
+import portrait from "../assets/author_portrait.webp";
 import BookTrailer from "../assets/book_trailer.mp4";
 import "../sections.css";
 import { useEffect } from "react";
